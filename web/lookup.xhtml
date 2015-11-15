@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>User Registration</title>
+    </h:head>
+
+    <h:body>
+        <p:button outcome="index" value="Go back" icon="ui-icon-arrowreturnthick-1-w"></p:button>
+
+        <p:separator />
+
+        <f:view>
+            <h:form prependId="false">
+                <h1>Enter Lookup Criteria</h1>
+                <h:panelGrid columns="6">
+                    <h:outputLabel value="Email"></h:outputLabel>
+                    <h:inputText id="email" value="#{userProfileBean.emailId}"></h:inputText>
+                </h:panelGrid>
+                <h:commandButton value="Lookup" type="command" actionListener="#{userControl.lookup}">
+                    <f:ajax execute="email" render="results"/>
+                </h:commandButton>
+                <h:commandButton value="Reset" type="reset" />
+
+                <div>
+                    <hr/>
+                    <hr/>
+                    <h:panelGroup id="results">
+                        <h:dataTable  rendered="#{userProfileBean.showResults}" border="2" bgcolor="lightblue" id="resultTable" value="#{userProfileBean.lookupResults}" var="user">
+                            <h:column>
+                                <f:facet name="header">User Id</f:facet>
+                                    #{user.emailId}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Name</f:facet>
+                                    #{user.emailId}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Birth Date</f:facet>
+                                    #{user.emailId}
+                            </h:column>
+                        </h:dataTable>
+                        <h:outputText rendered="#{userProfileBean.showMessage}" style="color:red" id="resultMessage" value="No user found"/>
+                    </h:panelGroup>
+                </div>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+
